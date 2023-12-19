@@ -65,7 +65,11 @@ pipeline{
                 sh "trivy image iamsaikishore/netflix-clone:latest > trivyimage.txt" 
             }
         }
-
+        stage('Deploy to container'){
+            steps{
+                sh 'docker run -d --name netflix -p 8081:80 iamsaikishore/netflix-clone:latest'
+            }
+        }
     }
     post {
      always {
