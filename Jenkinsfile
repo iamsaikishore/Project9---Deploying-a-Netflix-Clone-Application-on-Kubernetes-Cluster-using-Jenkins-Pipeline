@@ -15,7 +15,7 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'main', url: 'https://github.com/Aj7Ay/Netflix-clone.git'
+                git branch: 'main', url: 'https://github.com/iamsaikishore/Project9---Deploying-a-Netflix-Clone-Application-on-Kubernetes-Cluster-using-Jenkins-Pipeline.git'
             }
         }
         stage("Sonarqube Analysis "){
@@ -54,15 +54,15 @@ pipeline{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
                        sh "docker build --build-arg TMDB_V3_API_KEY=Aj7ay86fe14eca3e76869b92 -t netflix ."
-                       sh "docker tag netflix sevenajay/netflix:latest "
-                       sh "docker push sevenajay/netflix:latest "
+                       sh "docker tag netflix iamsaikishore/netflix-clone:latest "
+                       sh "docker push iamsaikishore/netflix-clone:latest "
                     }
                 }
             }
         }
         stage("TRIVY"){
             steps{
-                sh "trivy image sevenajay/netflix:latest > trivyimage.txt" 
+                sh "trivy image iamsaikishore/netflix-clone:latest > trivyimage.txt" 
             }
         }
 
